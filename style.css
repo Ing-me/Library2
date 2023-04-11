@@ -1,0 +1,330 @@
+*, *::after, *::before{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root{
+    --bg-color: #fbcfe8;
+    --text-color: #242424;
+    --font-size: 16px;
+    --header-color: #9f1239;
+    --footer-color: #9f1239;
+    --secondary-color: #fafafa;
+    --transition: ease-in 1s;
+    --font-logo: 'Tilt Warp', cursive;
+    --text-font: 'Merriweather', serif;
+    --card-bg-color: #673AB7;
+    --card-text-color: #FFFFFF;
+    --card-accent-color: #536DFE;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100vw;
+    min-height: 100vh;
+    overflow: hidden;
+    background-color: var(--bg-color);
+    position: relative;
+}
+
+.navBar{
+    background-color: var(--header-color);
+    width: 100%;
+    color: var(--secondary-color);
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    margin-bottom: 5px;
+}
+.navBar > a {
+    text-decoration: none;
+}
+.navBar .logo{
+    color: var(--secondary-color);
+    font-family: var(--font-logo);
+    font-size: clamp(1rem, 2vw, 2rem);
+    font-weight: bold;
+}
+.navBar > ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.navBar > ul > .item {
+    padding: 10px 20px;
+    margin-right: 2px;
+    list-style: none;
+    position: relative;
+    border-right: 1px solid #FFFFFF;
+}
+.navBar > ul > .item:last-of-type {
+    margin-right: 0;
+    border-right: none;
+}
+.navBar > ul > .item:hover{
+    background-color: var(--secondary-color);
+    color: var(--header-color);
+}
+.navBar > ul > .item::after{
+    content: "";
+    position: absolute;
+    transition: var(--transition);
+    background-color: var(--header-color);
+    width: 0%;
+    height: 3px;
+    bottom: 0;
+    left: 0;
+}
+.navBar > ul > .item:hover::after{
+    width: 100%;
+}
+
+.navBar > ul > .item > a:hover{
+    color: var(--header-color);
+}
+
+
+.navBar > ul > .item > a{
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-family: var(--text-font);
+    font-weight: bolder;
+}
+.main{
+    margin-top: 80px;
+    margin-bottom: 20px;
+    width: 100%;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+.add-button{
+    font-size: 2rem;
+    background-color: var(--header-color);
+    border: none;
+    color: var(--secondary-color);
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: flex-end;
+    position: sticky;
+    border-radius: 50%;
+    top: 10px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    z-index: 1;
+}
+.add-button > img{
+    width: 50px;
+    height: 50px;
+}
+
+.cards{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-auto-rows: 260px;
+    gap: 2rem;
+    padding-bottom: 2rem;
+    margin-top: 10px;
+}
+.card{
+    background-color: var(--bg-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    border-radius: 10px;
+    border: 3px solid var(--header-color);
+    transition: .5s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.card:focus,
+.card:hover{
+    transform: rotateY(20deg);
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.card > .cardTitle{
+    font-size: 20px;
+    width: 100%;
+    color: var(--header-color);
+    text-transform: uppercase;
+    text-align: center;
+    padding: 10px 0;
+    border-bottom: 5px solid var(--header-color);
+}
+.card > .cardBody{
+    padding: 15px 15px;
+    line-height: 1.5;
+    font-size: 1.2rem;
+    color: var(--text-color);
+    font-weight: bold;
+}
+.card > .cardFooter{
+    border-top: 5px solid var(--header-color);
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.card > .cardFooter > .buttonEdit{
+    font-size: 1.2rem;
+    margin: 10px 0;
+    padding: 5px 20px;
+    cursor: pointer;
+    background-color: var(--header-color);
+    border: none;
+    border-radius: 10px;
+    color: var(--secondary-color);
+    width: 45%;
+}
+
+.footer{
+    background-color: var(--footer-color);
+    color: var(--secondary-color);
+    text-align: center;
+    padding: 20px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+.bold{
+    font-weight: 800;
+}
+
+/* Modal's start */
+.modal{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    padding-top: 20vh;
+    backdrop-filter: blur(10px);
+}
+
+.modal-content{
+    border: 1px solid #888;
+    margin: auto;
+    padding: 20px;
+    width: calc(40% + 35px);
+}
+.modal-content > .close{
+    float: right;
+    font-size: 32px;
+    font-weight: bold;
+}
+.modal-content > .close:hover,
+.modal-content > .close:focus {
+    color: var(--header-color);
+    cursor: pointer;
+}
+
+.modal-form{
+    font-size: 1.1rem;
+}
+.form-title{
+    text-align: center;
+    text-transform: capitalize;
+    border-bottom: 2px solid var(--header-color);
+    margin-bottom: 2rem;
+}
+.add-book-form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    padding: 20px;
+    flex-direction: column;
+    width: 70%;
+    border: 2px solid var(--header-color);
+}
+.modal-input-field{
+    width: 100%;
+    margin: 5px;
+    padding: 5px;
+}
+.modal-input-field > label{
+    font-size: 1.2rem;
+    width: 30%;
+}
+.modal-input-field > input{
+    width: clamp(100px, 70%, 300%);
+    padding: .2rem 20px;
+    border-radius: 10px;
+    border: 2px solid var(--header-color);
+    background-color: var(--bg-color);
+    float: right;
+    font-size: 1.1rem;
+}
+
+.submit-modal-form{
+    margin: 15px;
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    padding-top: 10px;
+}
+.submit-modal-form > .addButton{
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    padding: 10px 30px;
+    border-radius: 10px;
+    border: none;
+    background-color: var(--header-color);
+    color: var(--secondary-color);
+    cursor: pointer;
+}
+
+/* Modal's end */
+
+@media (max-width: 500px){
+    .container{
+        display: flex;
+        flex-direction: column;
+    }
+    .navBar > ul > .item {
+        padding: 2px 5px;
+        margin-right: 2px;
+    }
+    .main{
+        padding: 5px;
+    }
+    .cards{
+        margin: 0px 10px;
+    }
+    .modal
+    .modal-content{
+        width: 90%;
+        margin: auto;
+    }
+    .add-book-form{
+        width: 100%;
+    }
+    .cards{
+        margin: 10px 0px;
+    }
+    .card{
+        margin: 15px;
+    }
+    .card > .cardTitle{
+        padding: 5px 0;
+    }
+    .card > .cardBody{
+        padding: 5px 15px;
+    }
+}
+
